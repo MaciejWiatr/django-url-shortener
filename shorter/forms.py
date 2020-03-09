@@ -7,5 +7,5 @@ class LinkForm(ModelForm):
         model = Link
         fields = ['url']
         labels = {
-            'url': 'Enter url'
+            'url': 'Enter url:'
         }

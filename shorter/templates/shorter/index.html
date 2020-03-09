@@ -2,9 +2,10 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>URL Shortener</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
           integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script src="https://kit.fontawesome.com/f27026538d.js" crossorigin="anonymous"></script>
 
 </head>
 <style>
@@ -26,39 +27,65 @@
 <body>
 {% load crispy_forms_tags %}
 
-<h1>
-    Utwórz link
-</h1>
-{% if messages %}
-    <div>
+<div style="width: 400px">
+    {% if messages %}
         {% for message in messages %}
-            {{ message }}
+            {% if message.tags == 'info' %}
+                <div class="alert alert-success">
+                    {{ message }}
+                </div>
+            {% else %}
+                <div class="alert alert-error">
+                    {{ message }}
+                </div>
+            {% endif %}
+
         {% endfor %}
+    {% endif %}
+    <h1>
+        Shorten your URL!⚡
+    </h1>
+
+
+    <div class="form-wrapper">
+        <form method="post">
+            {% csrf_token %}
+            {{ form|crispy }}
+            <button class="btn btn-primary" type="submit">
+                Create URL ✨
+            </button>
+        </form>
     </div>
-{% endif %}
-{% if url %}
-    <div>
-        <a class='link' href="{{ url }}">Przejdź do</a>
-        <p class="raw-link"></p>
-    </div>
-{% endif %}
-<div class="form-wrapper" style="max-width: 400px">
-    <form method="post">
-        {% csrf_token %}
-        {{ form|crispy }}
-        <button class="btn btn-info" type="submit">
-            Dodaj url
-        </button>
-    </form>
+
+    {% if url %}
+        <hr>
+        <h1>Your new URL 😱</h1>
+        <div>
+            <a class='link' href="{{ url }}">Go to</a>
+            <div style="width: 100%">
+                <p style="display: inline-block; border-radius: 5px; width: 339px"
+                   class="p-3 mb-2 bg-light text-dark" id="raw-url">{{ url }}</p>
+                <button onclick="copy()"
+                        style='display: inline-block !important; height: 56px; width: 56px; transform: translateY(-2px)'
+                        class="btn btn-primary"><i
+                        class="far fa-copy"></i>
+                </button>
+            </div>
+
+        </div>
+    {% endif %}
 </div>
 
-
 <script>
-    let raw_link = document.getElementsByClassName('raw-link'),
-        url_item = document.getElementsByClassName('link');
-
-    console.log(url_item.href)
-
+    function copy() {
+        var copyText = document.getElementById("raw-url");
+        var textArea = document.createElement("textarea");
+        textArea.value = copyText.textContent;
+        document.body.appendChild(textArea);
+        textArea.select();
+        document.execCommand("Copy");
+        textArea.remove();
+    }
 </script>
 </body>
 </html>
