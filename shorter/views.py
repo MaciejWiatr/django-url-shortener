@@ -18,10 +18,10 @@ def index(request):
         if form.is_valid():
             link = form.save()
             link.save()
-            messages.info(request, f"Link został utworzony")
+            messages.info(request, f"Your URL was successfully created! 😍")
             context['url'] = request.build_absolute_uri() + link.code
         else:
-            messages.error(request, 'Wystąpił błąd')
+            messages.error(request, 'An error occured 😔')
 
     return render(request, 'shorter/index.html', context)
 
