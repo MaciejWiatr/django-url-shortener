@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+</head>
+<style>
+    body {
+        width: 100vw;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+    }
+
+    .asteriskField {
+        display: none;
+    }
+
+</style>
+
+<body>
+{% load crispy_forms_tags %}
+
+<h1>
+    Utwórz link
+</h1>
+{% if messages %}
+    <div>
+        {% for message in messages %}
+            {{ message }}
+        {% endfor %}
+    </div>
+{% endif %}
+{% if url %}
+    <div>
+        <a class='link' href="{{ url }}">Przejdź do</a>
+        <p class="raw-link"></p>
+    </div>
+{% endif %}
+<div class="form-wrapper" style="max-width: 400px">
+    <form method="post">
+        {% csrf_token %}
+        {{ form|crispy }}
+        <button class="btn btn-info" type="submit">
+            Dodaj url
+        </button>
+    </form>
+</div>
+
+
+<script>
+    let raw_link = document.getElementsByClassName('raw-link'),
+        url_item = document.getElementsByClassName('link');
+
+    console.log(url_item.href)
+
+</script>
+</body>
+</html>
