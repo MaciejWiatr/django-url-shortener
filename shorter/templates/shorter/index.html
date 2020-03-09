@@ -20,7 +20,6 @@
     .asteriskField {
         display: none;
     }
-
 </style>
 
 <body>
@@ -30,11 +29,11 @@
     Utwórz link
 </h1>
 {% if messages %}
-    <div>
-        {% for message in messages %}
+    {% for message in messages %}
+        <div class="alert alert-success">
             {{ message }}
-        {% endfor %}
-    </div>
+        </div>
+    {% endfor %}
 {% endif %}
 {% if url %}
     <div>

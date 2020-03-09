@@ -20,6 +20,8 @@ def index(request):
             link.save()
             messages.info(request, f"Link został utworzony")
             context['url'] = link.code
+        else:
+            messages.error(request, 'Wystąpił błąd')
 
     return render(request, 'shorter/index.html', context)
 
