@@ -19,7 +19,7 @@ def index(request):
             link = form.save()
             link.save()
             messages.info(request, f"Link został utworzony")
-            context['url'] = link.code
+            context['url'] = request.build_absolute_uri() + link.code
         else:
             messages.error(request, 'Wystąpił błąd')
 
