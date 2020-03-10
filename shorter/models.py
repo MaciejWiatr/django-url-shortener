@@ -4,13 +4,13 @@ from django.utils.crypto import get_random_string
 
 # Create your models here.
 class Link(models.Model):
-    url = models.URLField(unique=True, max_length=1000)
-    code = models.CharField(unique=True, max_length=1000,null=True,blank=True)
+    url = models.URLField(max_length=1000)
+    code = models.CharField(unique=True, max_length=1000, null=True, blank=True)
 
     def __str__(self):
         return self.url
 
-    def save(self, *args,**kwargs):
+    def save(self, *args, **kwargs):
         if not self.code:
             while True:
                 try:
