@@ -26,66 +26,75 @@
 
 <body>
 {% load crispy_forms_tags %}
+<div class="container-fluid ">
+    <div class="row justify-content-center">
+        <div class="col-sm-8 col-md-6 col-lg-4 col-xl-3">
+            {% if messages %}
+                {% for message in messages %}
+                    {% if message.tags == 'info' %}
+                        <div class="alert alert-success">
+                            {{ message }}
+                        </div>
+                    {% else %}
+                        <div class="alert alert-error">
+                            {{ message }}
+                        </div>
+                    {% endif %}
 
-<div style="">
-    {% if messages %}
-        {% for message in messages %}
-            {% if message.tags == 'info' %}
-                <div class="alert alert-success">
-                    {{ message }}
-                </div>
-            {% else %}
-                <div class="alert alert-error">
-                    {{ message }}
-                </div>
+                {% endfor %}
             {% endif %}
+            <div class="card">
+                <div class="card-header">
+                    <h1>
+                        Shorten your URL!⚡
+                    </h1>
+                </div>
+                <div class="card-body">
+                    <div class="form-wrapper">
+                        <form method="post">
+                            {% csrf_token %}
+                            {{ form|crispy }}
+                            <button class="btn btn-primary" type="submit">
+                                Create URL ✨
+                            </button>
+                        </form>
+                    </div>
+                </div>
 
-        {% endfor %}
-    {% endif %}
-    <div class="card">
-        <div class="card-header">
-            <h1>
-                Shorten your URL!⚡
-            </h1>
-        </div>
-        <div class="card-body">
-            <div class="form-wrapper">
-                <form method="post">
-                    {% csrf_token %}
-                    {{ form|crispy }}
-                    <button class="btn btn-primary" type="submit">
-                        Create URL ✨
-                    </button>
-                </form>
+
             </div>
+
+
+            {% if url %}
+                <div class="card mt-3">
+                    <div class="card-header">
+                        <h2>Your new URL 😱</h2>
+                    </div>
+                    <div class="card-body">
+                        <a class='link' href="{{ url }}">Go to</a>
+                        <div style="width: 100%; display: flex">
+                            <span style="border-radius: 5px; width: 100%; margin-right: 5px"
+                                  class="p-3 mb-2 bg-light text-dark" id="raw-url">{{ url }}</span>
+                            <button onclick="copy()"
+                                    style='height: 56px; width: 56px;'
+                                    class="btn btn-primary"><i
+                                    class="far fa-copy"></i>
+                            </button>
+                        </div>
+                        <div style="display: flex;justify-content: center; align-items: center">
+                            <img src="{{ qr }}">
+                        </div>
+
+
+                    </div>
+                </div>
+
+            {% endif %}
         </div>
-
-
     </div>
 
-
-    {% if url %}
-        <div class="card mt-3">
-            <div class="card-header">
-                <h2>Your new URL 😱</h2>
-            </div>
-            <div class="card-body">
-                <a class='link' href="{{ url }}">Go to</a>
-                <div style="width: 100%">
-                    <p style="display: inline-block; border-radius: 5px; width: 339px"
-                       class="p-3 mb-2 bg-light text-dark" id="raw-url">{{ url }}</p>
-                    <button onclick="copy()"
-                            style='display: inline-block !important; height: 56px; width: 56px; transform: translateY(-2px)'
-                            class="btn btn-primary"><i
-                            class="far fa-copy"></i>
-                    </button>
-                </div>
-
-            </div>
-        </div>
-
-    {% endif %}
 </div>
+
 
 <script>
     function copy() {

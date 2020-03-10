@@ -16,10 +16,15 @@ def index(request):
     if request.method == 'POST':
         form = LinkForm(request.POST)
         if form.is_valid():
-            link = form.save()
-            link.save()
+            url = request.POST.get('url')
+            if Link.objects.filter(url=url).exists():
+                link = Link.objects.get(url=url)
+            else:
+                link = form.save()
+                link.save()
             messages.info(request, f"Your URL was successfully created! 😍")
             context['url'] = request.build_absolute_uri() + link.code
+            context['qr'] = link.qr.url
         else:
             messages.error(request, 'An error occured 😔')
 
