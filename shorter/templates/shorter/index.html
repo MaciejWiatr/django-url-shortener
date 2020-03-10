@@ -27,7 +27,7 @@
 <body>
 {% load crispy_forms_tags %}
 
-<div style="width: 400px">
+<div style="">
     {% if messages %}
         {% for message in messages %}
             {% if message.tags == 'info' %}
@@ -42,37 +42,48 @@
 
         {% endfor %}
     {% endif %}
-    <h1>
-        Shorten your URL!⚡
-    </h1>
+    <div class="card">
+        <div class="card-header">
+            <h1>
+                Shorten your URL!⚡
+            </h1>
+        </div>
+        <div class="card-body">
+            <div class="form-wrapper">
+                <form method="post">
+                    {% csrf_token %}
+                    {{ form|crispy }}
+                    <button class="btn btn-primary" type="submit">
+                        Create URL ✨
+                    </button>
+                </form>
+            </div>
+        </div>
 
 
-    <div class="form-wrapper">
-        <form method="post">
-            {% csrf_token %}
-            {{ form|crispy }}
-            <button class="btn btn-primary" type="submit">
-                Create URL ✨
-            </button>
-        </form>
     </div>
 
-    {% if url %}
-        <hr>
-        <h1>Your new URL 😱</h1>
-        <div>
-            <a class='link' href="{{ url }}">Go to</a>
-            <div style="width: 100%">
-                <p style="display: inline-block; border-radius: 5px; width: 339px"
-                   class="p-3 mb-2 bg-light text-dark" id="raw-url">{{ url }}</p>
-                <button onclick="copy()"
-                        style='display: inline-block !important; height: 56px; width: 56px; transform: translateY(-2px)'
-                        class="btn btn-primary"><i
-                        class="far fa-copy"></i>
-                </button>
-            </div>
 
+    {% if url %}
+        <div class="card mt-3">
+            <div class="card-header">
+                <h2>Your new URL 😱</h2>
+            </div>
+            <div class="card-body">
+                <a class='link' href="{{ url }}">Go to</a>
+                <div style="width: 100%">
+                    <p style="display: inline-block; border-radius: 5px; width: 339px"
+                       class="p-3 mb-2 bg-light text-dark" id="raw-url">{{ url }}</p>
+                    <button onclick="copy()"
+                            style='display: inline-block !important; height: 56px; width: 56px; transform: translateY(-2px)'
+                            class="btn btn-primary"><i
+                            class="far fa-copy"></i>
+                    </button>
+                </div>
+
+            </div>
         </div>
+
     {% endif %}
 </div>
 
