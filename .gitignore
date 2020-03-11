@@ -1,3 +1,4 @@
 /db.sqlite3
 /.venv/
 /migrate.bat
+/media/
