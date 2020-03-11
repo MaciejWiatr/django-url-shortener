@@ -2,6 +2,8 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="height=device-height, initial-scale=1">
     <title>URL Shortener</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
           integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
@@ -11,7 +13,6 @@
 <style>
     body {
         width: 100vw;
-        height: 100vh;
         display: flex;
         justify-content: center;
         align-items: center;
@@ -26,7 +27,7 @@
 
 <body>
 {% load crispy_forms_tags %}
-<div class="container-fluid ">
+<div class="container-fluid mt-4 mb-4">
     <div class="row justify-content-center">
         <div class="col-sm-8 col-md-6 col-lg-4 col-xl-3">
             {% if messages %}
@@ -72,11 +73,13 @@
                     </div>
                     <div class="card-body">
                         <a class='link' href="{{ url }}">Go to</a>
-                        <div style="width: 100%; display: flex">
-                            <span style="border-radius: 5px; width: 100%; margin-right: 5px"
-                                  class="p-3 mb-2 bg-light text-dark" id="raw-url">{{ url }}</span>
+                        <div style="width: 100%; display: flex;box-sizing: border-box;">
+                            <textarea
+                                    style="border-radius: 5px;box-sizing: border-box; max-height: 56px; margin-right: 5px; flex-grow: 2; overflow: hidden; border:none
+"
+                                    class="p-3 mb-2 bg-light text-dark" id="raw-url">{{ url }}</textarea>
                             <button onclick="copy()"
-                                    style='height: 56px; width: 56px;'
+                                    style='max-height: 56px;max-width: 56px; flex-grow: 1'
                                     class="btn btn-primary"><i
                                     class="far fa-copy"></i>
                             </button>
