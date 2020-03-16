@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="viewport" content="height=device-height, initial-scale=1">
     <title>URL Shortener</title>
+    <link rel="shortcut icon" href="{% static "favicon.png" %}">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
           integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <script src="https://kit.fontawesome.com/f27026538d.js" crossorigin="anonymous"></script>
@@ -12,6 +14,7 @@
 </head>
 <style>
     body {
+        min-height: 100vh;
         width: 100vw;
         display: flex;
         justify-content: center;
@@ -22,6 +25,29 @@
     .asteriskField {
         display: none;
     }
+
+    textarea {
+        overflow-y: scroll;
+    }
+
+    ::-webkit-scrollbar {
+        width: 5px;
+    }
+
+    ::-webkit-scrollbar-track {
+        background: #f1f1f1;
+    }
+
+    ::-webkit-scrollbar-thumb {
+        background: #007BFF;
+        border-radius: 5px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+        background: #005AEE;
+        cursor: pointer !important;
+    }
+
 
 </style>
 
@@ -75,9 +101,13 @@
                         <a class='link' href="{{ url }}">Go to</a>
                         <div style="width: 100%; display: flex;box-sizing: border-box;">
                             <textarea
-                                    style="border-radius: 5px;box-sizing: border-box; max-height: 56px; margin-right: 5px; flex-grow: 2; overflow: hidden; border:none
+                                    style="border-radius: 5px;box-sizing: border-box; max-height: 56px; margin-right: 5px; flex-grow: 2;border:none
 "
-                                    class="p-3 mb-2 bg-light text-dark" id="raw-url">{{ url }}</textarea>
+                                    class="p-3 mb-2 bg-light text-dark" id="raw-url"
+                                    readonly
+
+                            >{{ url }}
+                            </textarea>
                             <button onclick="copy()"
                                     style='max-height: 56px;max-width: 56px; flex-grow: 1'
                                     class="btn btn-primary"><i
@@ -85,7 +115,7 @@
                             </button>
                         </div>
                         <div style="display: flex;justify-content: center; align-items: center">
-                            <img src="{{ qr }}">
+                            <img src="{{ qr }}" alt="qr">
                         </div>
 
 

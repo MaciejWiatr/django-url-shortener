@@ -2,3 +2,4 @@
 /.venv/
 /migrate.bat
 /media/
+/static/
