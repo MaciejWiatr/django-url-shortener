@@ -1,7 +1,7 @@
 # Django URL Shortener 🐍
 
 
-Simple yet powerfull URL shortener written in Python Django
+Simple yet powerful URL shortener written in Python Django
 
 ### Features:
   - Url shortening 
