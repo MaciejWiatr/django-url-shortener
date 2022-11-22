@@ -3,7 +3,7 @@ coverage==5.0.3
 Django==3.0.4
 django-cleanup==4.0.0
 django-crispy-forms==1.9.0
-Pillow==7.0.0
+Pillow==9.3.0
 pypng==0.0.20
 PyQRCode==1.2.1
 pytz==2019.3
